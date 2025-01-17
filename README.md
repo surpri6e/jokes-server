@@ -1,1 +1,1 @@
-# jokes-server
+# Server for jokes project
