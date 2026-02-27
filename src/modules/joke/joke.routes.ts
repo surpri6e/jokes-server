@@ -1,5 +1,5 @@
 import Route from 'express';
-import { JokesController } from './jokes.controller';
+import { JokesController } from './joke.controller';
 export const jokesRoutes = Route();
 
 jokesRoutes.get('/one_of_the_day', JokesController.getJokeOfTheDay);

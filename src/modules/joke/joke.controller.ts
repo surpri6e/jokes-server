@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { databasePool } from '../../database';
+// import { databasePool } from '../../database';
 
 export class JokesController {
     static async getJokeOfTheDay(req: Request, res: Response) {
@@ -25,12 +25,11 @@ export class JokesController {
     }
 
     static async offerJoke(req: any, res: any) {
-        const data = await databasePool.query(
-            'INSERT INTO notAdminAccessedJokes (text, dateOfCreate, author, adminAccess, rating, name, linkOnImage) VALUES ($1, $2, $3, $4, $5, $6, $7)',
-            ['Cool', '20.12.24', 'sur', true, 5, 'chel', null],
-        );
-
-        console.log(data);
+        // const data = await databasePool.query(
+        //     'INSERT INTO notAdminAccessedJokes (text, dateOfCreate, author, adminAccess, rating, name, linkOnImage) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+        //     ['Cool', '20.12.24', 'sur', true, 5, 'chel', null],
+        // );
+        // console.log(data);
     }
 
     static async accessJoke(req: any, res: any) {
