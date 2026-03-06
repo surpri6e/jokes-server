@@ -7,6 +7,8 @@ import { UserService } from './user.service';
 import { ControllerError } from '../../utils/functionals/errors/controllerError';
 import { sendErrorResponse, sendGoodResponse } from '../../utils/functionals/sendResponses';
 import { GOOD_RESPONSE_MESSAGE_GET_USER_BY_ID, GOOD_RESPONSE_MESSAGE_REGISTRATION_USER } from './user.constants';
+import { controlAccess } from '../../utils/functionals/controlAccess';
+import { HEADER_KEY } from '../../utils/constants/headerKey.constants';
 
 interface IUserControllerRealization {
     getUserById: (req: TGetUserByIdRequest, res: Response) => Promise<void>;
@@ -38,6 +40,8 @@ export class UserController implements IUserControllerRealization {
 
     public readonly getUserById = async (req: TGetUserByIdRequest, res: Response) => {
         try {
+            controlAccess(req.headers[HEADER_KEY]);
+
             const user = await this.m_userService.getUserById(req.params.id);
 
             sendGoodResponse(res, GOOD_RESPONSE_MESSAGE_GET_USER_BY_ID, user);
@@ -46,8 +50,11 @@ export class UserController implements IUserControllerRealization {
         }
     };
 
+    // Do custom error handler
     public readonly registrationUser = async (req: TRegistrationUserRequest, res: Response) => {
         try {
+            controlAccess(req.headers[HEADER_KEY]);
+
             await this.m_userService.registrationUser(req.body);
 
             sendGoodResponse(res, GOOD_RESPONSE_MESSAGE_REGISTRATION_USER, null);

@@ -5,6 +5,7 @@ export const ALREADY_EXISTENT_USER = 'Пользователь с таким id 
 
 interface ErrorBodiesForUserModule {
     NON_EXISTENT_USER: IDatabaseErrorBodyConstructor;
+    // ARCHIVE
     ALREADY_EXISTENT_USER: IDatabaseErrorBodyConstructor;
 }
 
@@ -13,6 +14,7 @@ export const ERROR_BODIES_FOR_USER_MODULE: ErrorBodiesForUserModule = {
         clue: 'Попробуйте пересмотреть id, который вы передаёте в функцию.',
         status: 500,
     },
+    // ARCHIVE
     ALREADY_EXISTENT_USER: {
         clue: 'Возможно информация о том, что пользователь уже существует пригодится для других обработчиков.',
         status: 500,

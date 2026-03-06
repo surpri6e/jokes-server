@@ -16,6 +16,7 @@ import {
 } from './joke.constants';
 import { QueryParamsError } from '../../utils/functionals/errors/queryParamsError';
 import { controlAccess } from '../../utils/functionals/controlAccess';
+import { HEADER_KEY } from '../../utils/constants/headerKey.constants';
 
 interface IJokeControllerRealization {
     offerJoke: (req: TOfferJokeRequest, res: Response) => Promise<void>;
@@ -50,7 +51,7 @@ export class JokeController implements IJokeControllerRealization {
 
     public readonly offerJoke = async (req: TOfferJokeRequest, res: Response) => {
         try {
-            controlAccess(req.headers['X-APP-KEY']);
+            controlAccess(req.headers[HEADER_KEY]);
 
             const joke = req.body;
 
@@ -71,7 +72,7 @@ export class JokeController implements IJokeControllerRealization {
 
     public readonly getJokeById = async (req: TGetJokeByIdRequest, res: Response) => {
         try {
-            controlAccess(req.headers['X-APP-KEY']);
+            controlAccess(req.headers[HEADER_KEY]);
 
             const id = req.params.id;
 
@@ -85,22 +86,25 @@ export class JokeController implements IJokeControllerRealization {
 
     public readonly getJokesBy = async (req: TGetJokesByRequest, res: Response) => {
         try {
-            controlAccess(req.headers['X-APP-KEY']);
+            controlAccess(req.headers[HEADER_KEY]);
 
             const queryParams = req.query;
 
+            // Do custom error handler
             if (queryParams.user_id) {
                 const jokes = await this.m_jokeService.getJokesByUserId(queryParams.user_id);
                 sendGoodResponse(res, GOOD_RESPONSE_MESSAGE_GET_JOKES_BY_USER_ID, jokes);
                 return;
             }
 
+            // Do custom error handler
             if (queryParams.name) {
                 const jokes = await this.m_jokeService.getJokesByName(queryParams.name);
                 sendGoodResponse(res, GOOD_RESPONSE_MESSAGE_GET_JOKES_BY_NAME, jokes);
                 return;
             }
 
+            // Do custom error handler
             if (queryParams.author) {
                 const jokes = await this.m_jokeService.getJokesByAuthor(queryParams.author);
                 sendGoodResponse(res, GOOD_RESPONSE_MESSAGE_GET_JOKES_BY_AUTHOR, jokes);
