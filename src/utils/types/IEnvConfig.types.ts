@@ -8,4 +8,6 @@ export interface IEnvConfig {
     SERVER_PORT: number;
 
     IS_DEBUG: boolean;
+
+    X_APP_KEY: string;
 }

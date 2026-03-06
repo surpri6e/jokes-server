@@ -13,4 +13,6 @@ export const ENV_CONFIG: IEnvConfig = {
     SERVER_PORT: process.env.SERVER_PORT ? Number(process.env.SERVER_PORT) : 0,
 
     IS_DEBUG: process.env.IS_DEBUG && Number(process.env.IS_DEBUG) === 1 ? true : false,
+
+    X_APP_KEY: process.env.X_APP_KEY ? process.env.X_APP_KEY : '',
 } as const;

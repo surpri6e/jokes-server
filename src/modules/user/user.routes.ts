@@ -2,6 +2,8 @@ import Route from 'express';
 import { UserController } from './user.controller';
 export const userRoutes = Route();
 
-userRoutes.get('/user/:id', UserController.getUserById);
+const userController = UserController.getInstance();
 
-userRoutes.post('/user', UserController.registrationUser);
+userRoutes.get('/user/:id', userController.getUserById);
+
+userRoutes.post('/user', userController.registrationUser);

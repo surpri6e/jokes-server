@@ -9,5 +9,7 @@ namespace NodeJS {
         SERVER_PORT: string | undefined;
 
         IS_DEBUG: string | undefined;
+
+        X_APP_KEY: string | undefined;
     }
 }

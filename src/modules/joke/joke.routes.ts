@@ -1,14 +1,11 @@
 import Route from 'express';
-import { JokesController } from './joke.controller';
-export const jokesRoutes = Route();
+import { JokeController } from './joke.controller';
 
-jokesRoutes.get('/one_of_the_day', JokesController.getJokeOfTheDay);
+export const jokeRoutes = Route();
 
-jokesRoutes.get('/by_text', JokesController.getJokesByText);
-jokesRoutes.get('/by_author', JokesController.getJokesByAuthor);
-jokesRoutes.get('/by_name', JokesController.getJokesByName);
+const jokeController = JokeController.getInstance();
 
-jokesRoutes.get('/one_by_id', JokesController.getJokeById);
+jokeRoutes.post('/joke', jokeController.offerJoke);
 
-jokesRoutes.post('/one_offer', JokesController.offerJoke);
-jokesRoutes.post('/one_access', JokesController.accessJoke);
+jokeRoutes.get('/joke/:id', jokeController.getJokeById);
+jokeRoutes.get('/jokes', jokeController.getJokesBy);
